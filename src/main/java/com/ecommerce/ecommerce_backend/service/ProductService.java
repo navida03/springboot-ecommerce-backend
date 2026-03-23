@@ -1,34 +1,17 @@
 package com.ecommerce.ecommerce_backend.service;
 
 import com.ecommerce.ecommerce_backend.model.Product;
-import com.ecommerce.ecommerce_backend.repository.ProductRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class ProductService {
+public interface ProductService {
 
-    private final ProductRepository productRepository;
+    List<Product> getAllProducts();
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    Product getProductById(Long id);
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
+    Product addProduct(Product product);
 
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
-    }
+    Product updateProduct(Long id, Product product);
 
-    public Product getProductById(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-    }
-
-    public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
-    }
+    void deleteProduct(Long id);
 }

@@ -1,7 +1,7 @@
 package com.ecommerce.ecommerce_backend.model;
 
-
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -11,58 +11,59 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String customerName;
+    private double totalAmount;
 
-    private String productName;
+    private LocalDateTime createdAt;
 
-    private int quantity;
+    private String status;
 
-    private double totalPrice;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Order() {
     }
 
-    public Order(String customerName, String productName, int quantity, double totalPrice) {
-        this.customerName = customerName;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
+    public Order(double totalAmount, LocalDateTime createdAt, String status, User user) {
+        this.totalAmount = totalAmount;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.user = user;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public String getProductName() {
-        return productName;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public User getUser() {
+        return user;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,6 +1,5 @@
 package com.ecommerce.ecommerce_backend.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -11,18 +10,22 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private Long productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     private int quantity;
 
     public Cart() {
     }
 
-    public Cart(Long userId, Long productId, int quantity) {
-        this.userId = userId;
-        this.productId = productId;
+    public Cart(User user, Product product, int quantity) {
+        this.user = user;
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -30,20 +33,20 @@ public class Cart {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
